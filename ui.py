@@ -1,27 +1,37 @@
 import tkinter as tk
 from tkinter import messagebox
+from adfgvx import ADFGVX
 
 class UserInterface:
    def __init__(self):
        self.root = tk.Tk()
        self.root.title("ADFGVX Cipher")
+       self.input_label = tk.Label(self.root, text="Input:")
+       self.input_entry = tk.Entry(self.root)
+       self.encrypt_button = tk.Button(self.root, text="Encrypt", command=self.encrypt)
+       self.decrypt_button = tk.Button(self.root, text="Decrypt", command=self.decrypt)
+       self.output_label = tk.Label(self.root, text="Output:")
+       self.output_text = tk.Text(self.root)
 
-   def get_action(self):
-       return messagebox.askyesno("Action", "Encrypt or Decrypt?")
+       self.input_label.pack()
+       self.input_entry.pack()
+       self.encrypt_button.pack()
+       self.decrypt_button.pack()
+       self.output_label.pack()
+       self.output_text.pack()
 
-   def get_message(self):
-    while True:
-        message = messagebox.askstring("Message", "Enter the message")
-        if message:
-             return message
-   def get_key(self):
-        while True:
-           key = messagebox.askstring("Key", "Enter the key")
-           if key:
-             return key
+   def encrypt(self):
+       message = self.input_entry.get().upper()
+       key = 'KEY'
+       cipher = ADFGVX('POLYBIUS SQUARE', key)
+       result = cipher.encrypt(message)
+       self.output_text.delete(1.0, tk.END)
+       self.output_text.insert(tk.END, result)
 
-   def show_result(self, result):
-       messagebox.showinfo("Result", result)
-
-   def run(self):
-       self.root.mainloop()
+   def decrypt(self):
+       message = self.input_entry.get().upper()
+       key = 'KEY'
+       cipher = ADFGVX('POLYBIUS SQUARE', key)
+       result = cipher.decrypt(message)
+       self.output_text.delete(1.0, tk.END)
+       self.output_text.insert(tk.END, result)
