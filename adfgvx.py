@@ -3,7 +3,7 @@ from itertools import product, accumulate
 
 class ADFGVX:
   """ The WWI German ADFGVX cipher. """
-  def __init__(self, spoly, k, alph='ADFGVX'):
+  def __init__(self, spoly, k, alph='QWERTYUIOPASDFGHJKLZXCVBNM'):
    self.polybius = list(spoly.upper())
    self.pdim = int(len(self.polybius) ** 0.5)
    self.key = list(k.upper())
