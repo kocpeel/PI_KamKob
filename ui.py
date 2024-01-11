@@ -1,5 +1,7 @@
 import tkinter as tk
-from tkinter import messagebox
+
+# PIP INSTALL TKINTER IF YOU DON'T HAVE ONE
+
 from adfgvx import ADFGVX
 
 class UserInterface:
@@ -23,7 +25,7 @@ class UserInterface:
    def encrypt(self):
        message = self.input_entry.get().upper()
        key = 'KEY'
-       cipher = ADFGVX('POLYBIUS SQUARE', key)
+       cipher = ADFGVX('QWERTYUIOPASDFGHJKLZXCVBNM', key) # POLIBEUS SQUARE MARK (+)
        result = cipher.encrypt(message)
        self.output_text.delete(1.0, tk.END)
        self.output_text.insert(tk.END, result)
@@ -31,7 +33,7 @@ class UserInterface:
    def decrypt(self):
        message = self.input_entry.get().upper()
        key = 'KEY'
-       cipher = ADFGVX('POLYBIUS SQUARE', key)
+       cipher = ADFGVX('QWERTYUIOPASDFGHJKLZXCVBNM', key) # POLIBEUS SQUARE MARK (+)
        result = cipher.decrypt(message)
        self.output_text.delete(1.0, tk.END)
        self.output_text.insert(tk.END, result)

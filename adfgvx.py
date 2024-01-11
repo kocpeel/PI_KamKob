@@ -1,16 +1,15 @@
-from random import shuffle, choice
 from itertools import product, accumulate
 
 class ADFGVX:
   """ The WWI German ADFGVX cipher. """
-#  def __init__(self, spoly, k, alph='ADFGVX'):
-  def __init__(self, spoly, k, alph='QWERTUIOPASDFGHJKLZXCVBNM'):
+  def __init__(self, spoly, k, alph='ADFGVX'): # POLIBEUS SQUARE (//)
+#  def __init__(self, spoly, k, alph='QWERTYUIOPASDFGHJKLZXCVBNM'): # POLIBEUS SQUARE MARK (-)
    self.polybius = list(spoly.upper())
    self.pdim = int(len(self.polybius) ** 0.5)
    self.key = list(k.upper())
    self.keylen = len(self.key)
    self.alphabet = list(alph)
-  # self.alphabet = list(alph + ('V') + ('W') + ('M') + ('T') + ('D') + ('F') + ('G') + ('H') + ('J') + ('K') + ('Z') + ('X') + ('C') + ('N'))
+  # self.alphabet = list(alph + ('V') + ('W') + ('M') + ('T') + ('D') + ('F') + ('G') + ('H') + ('J') + ('K') + ('Z') + ('X') + ('C') + ('N')) # POLIBEUS SQUARE MARK (-)
    pairs = [p[0] + p[1] for p in product(self.alphabet, self.alphabet)]
    self.encode = {**dict.fromkeys(self.polybius, None), **dict(zip(self.polybius, pairs))}
    self.decode = dict((v, k) for (k, v) in self.encode.items())
@@ -24,7 +23,7 @@ class ADFGVX:
       return ''.join([''.join(a[1]) for a in colvecs])
 
   def decrypt(self, cod):
-   """ Decrypt with the ADFGVX cipher. Does (should*) not depend on spacing of encoded text """
+   """ Decrypt with the ADFGVX cipher. Does not depend on spacing of encoded text """
    chars = [c for c in cod if c in self.alphabet or c == ' ']
    sortedkey = sorted(self.key)
    order = [self.key.index(ch) for ch in sortedkey]
